@@ -7,7 +7,7 @@ public class TodosTest {
     public void shouldAddThreeTasksOfDifferentType() {
         SimpleTask simpleTask = new SimpleTask(5, "Позвонить родителям");
 
-        String[] subtasks = { "Молоко", "Яйца", "Хлеб" };
+        String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
 
         Meeting meeting = new Meeting(
@@ -23,7 +23,7 @@ public class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
-        Task[] expected = { simpleTask, epic, meeting };
+        Task[] expected = {simpleTask, epic, meeting};
         Task[] actual = todos.findAll();
         Assertions.assertArrayEquals(expected, actual);
     }
@@ -46,21 +46,23 @@ public class TodosTest {
 
     @Test
     public void queryMeetingTopic() {
-        Meeting task = new Meeting(5,"Прибыль", "Сделка Года", "22.05 12:00");
+        Meeting task = new Meeting(5, "Прибыль", "Сделка Года", "22.05 12:00");
         boolean expected = true;
         boolean actual = task.matches("Прибыль");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void queryMeetingProject() {
-        Meeting task = new Meeting(5,"Прибыль", "Сделка Года", "22.05 12:00");
+        Meeting task = new Meeting(5, "Прибыль", "Сделка Года", "22.05 12:00");
         boolean expected = true;
         boolean actual = task.matches("Сделка Года");
         Assertions.assertEquals(expected, actual);
     }
+
     @Test
     public void queryMeetingTopicProject() {
-        Meeting task = new Meeting(5,"Прибыль", "Прибыль", "22.05 12:00");
+        Meeting task = new Meeting(5, "Прибыль", "Прибыль", "22.05 12:00");
         boolean expected = true;
         boolean actual = task.matches("Прибыль");
         Assertions.assertEquals(expected, actual);
@@ -68,7 +70,7 @@ public class TodosTest {
 
     @Test
     public void queryMeetingFalse() {
-        Meeting task = new Meeting(5,"Прибыль", "Сделка Года", "22.05 12:00");
+        Meeting task = new Meeting(5, "Прибыль", "Сделка Года", "22.05 12:00");
         boolean expected = false;
         boolean actual = task.matches("Лениться");
         Assertions.assertEquals(expected, actual);
@@ -104,7 +106,7 @@ public class TodosTest {
 
     @Test
     public void searchEpic() {
-        String[] subtasks = { "Постирать", "Помыть", "Отдохнуть" };
+        String[] subtasks = {"Постирать", "Помыть", "Отдохнуть"};
         Epic task = new Epic(5, subtasks);
         Todos todos = new Todos();
         todos.add(task);
