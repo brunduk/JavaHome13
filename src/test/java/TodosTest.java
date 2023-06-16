@@ -124,4 +124,80 @@ public class TodosTest {
         Task[] actual = todos.search("Стирка");
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void searchAmongTwoTask() {
+        SimpleTask simple = new SimpleTask(5, "Дела");
+
+        Meeting meet = new Meeting(5, "Стирка", "Генеральная Уборка", "25.05 12:00");
+
+        String[] subtasks = {"Постирать", "Помыть", "Отдохнуть"};
+        Epic epic = new Epic(55, subtasks);
+
+        Todos todos = new Todos();
+        todos.add(meet);
+        todos.add(simple);
+        todos.add(epic);
+
+        Task[] expected = {meet};
+        Task[] actual = todos.search("Стирка");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchAmongThreeTaskTrueTwo() {
+        SimpleTask simple = new SimpleTask(5, "Дела");
+
+        Meeting meet = new Meeting(5, "Постирать", "Генеральная Уборка", "25.05 12:00");
+
+        String[] subtasks = {"Постирать", "Помыть", "Отдохнуть"};
+        Epic epic = new Epic(55, subtasks);
+
+        Todos todos = new Todos();
+        todos.add(meet);
+        todos.add(simple);
+        todos.add(epic);
+
+        Task[] expected = {meet, epic};
+        Task[] actual = todos.search("Постирать");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchAmongThreeTaskZero() {
+        SimpleTask simple = new SimpleTask(5, "Дела");
+
+        Meeting meet = new Meeting(5, "Постирать", "Генеральная Уборка", "25.05 12:00");
+
+        String[] subtasks = {"Постирать", "Помыть", "Отдохнуть"};
+        Epic epic = new Epic(55, subtasks);
+
+        Todos todos = new Todos();
+        todos.add(meet);
+        todos.add(simple);
+        todos.add(epic);
+
+        Task[] expected = {};
+        Task[] actual = todos.search("Ничего");
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchAmongThreeTaskThee() {
+        SimpleTask simple = new SimpleTask(5, "Проверка");
+
+        Meeting meet = new Meeting(5, "Стирать", "Проверка", "25.05 12:00");
+
+        String[] subtasks = {"Постирать", "Помыть", "Проверка"};
+        Epic epic = new Epic(55, subtasks);
+
+        Todos todos = new Todos();
+        todos.add(simple);
+        todos.add(meet);
+        todos.add(epic);
+
+        Task[] expected = {simple, meet, epic};
+        Task[] actual = todos.search("Проверка");
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
